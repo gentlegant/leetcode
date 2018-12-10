@@ -2,18 +2,17 @@
 
 #include<iostream>
 using namespace std;
-long long getN(int n){
-    
-    return pow(3,n)-1;
-}
+
 
 
 int main(){
     int n;
-  
-    while(cin>>n)
-        cout<<getN(n);
- 
+    cin>>n;
+    int res=1;
+    for(int i=0;i<n;i++)
+        res*=3;
+    
+    cout<<res-1;
     return 0;
 }
 

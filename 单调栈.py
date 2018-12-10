@@ -13,7 +13,8 @@
 # ，因此是-1，对于第1个数字3，需要走3步才能达到4（第一个比3大的元素），
 # 对于第2和第3个数字，都只需要走1步，就可以遇到比自己大的元素。对于最后一个数字4，
 # 因为之后没有更多的元素，所以是-1。
-#python 似乎没有原生的支持栈
+#python 似乎没有原生的支持栈  原因是因为list已经提供了
+
 
 class Solution:
     def nextExceed(self, x):
@@ -22,7 +23,18 @@ class Solution:
         :rtype: list int
         """
         stack=[]
-        
-        for imdex,i in enumerate(x):
-            if(stack.)
-        return True
+        res=[-1]*len(x)
+        for index,i in enumerate(x):
+            while(len(stack)>0 and i>x[stack[-1]]):
+                topindex=stack.pop()
+                res[topindex]=index-topindex
+
+
+            stack.append(index)
+       
+                
+        return res
+
+a=Solution()
+b=a.nextExceed([5,3,1,2,2,4])
+print(b)

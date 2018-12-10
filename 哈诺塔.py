@@ -18,4 +18,4 @@
 #     print(get(i+1))
 
 import numpy as np
-print(int(np.power(3,int(input())-1,dtype=float)*3-1))
+print(int(np.power(3,float(input()),dtype=float)-1))
