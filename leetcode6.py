@@ -58,4 +58,3 @@ class Solution1:
                     break
         res+=s[numRows-1::2*numRows-2]
         return res
-

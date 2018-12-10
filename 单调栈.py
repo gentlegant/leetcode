@@ -25,10 +25,10 @@ class Solution:
         stack=[]
         res=[-1]*len(x)
         for index,i in enumerate(x):
+            #小顶栈
             while(len(stack)>0 and i>x[stack[-1]]):
                 topindex=stack.pop()
                 res[topindex]=index-topindex
-
 
             stack.append(index)
        

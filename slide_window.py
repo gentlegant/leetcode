@@ -21,13 +21,23 @@
 # Sample Output 1
 
 # 27
+from queue import Queue
 
-from collections import queue
+
+from collections import deque
+
+
 
 #read input
 line=input().split()
-nums=[int(i) for i in line]
-N=int(input())
 
-Q=queue()
+N=int(input())
+res=0
+q=Queue()
+
+for i in line:
+    num=int(i)
+   
+
+print(res)
 
