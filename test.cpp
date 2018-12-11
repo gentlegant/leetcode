@@ -24,6 +24,9 @@ public:
 int main(){
     Solution a;
     vector<int> vc{4,2,0,3,2,5};
+
+
+    
     auto b=a.largestRectangleArea(vc);
     cout<<b;
 }
