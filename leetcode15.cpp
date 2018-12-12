@@ -4,36 +4,52 @@
 #include <algorithm>
 using namespace std;
 
-
-class Solution {
-public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
-        map<int,vector<int>> m;
+class Solution
+{
+  public:
+    vector<vector<int>> threeSum(vector<int> &nums)
+    {
         vector<vector<int>> res;
-        for(int  i=0;i<nums.size() ;i++){
-       
-                m[nums[i]].push_back(i);
-        }
-        int size=nums.size();
-        for(int i=0;i<size-2;i++){
-            for(int j=i+1;j<size-1;j++){
-                auto find=m.find(-nums[i]-nums[j]);
-                if(find!=m.end()){
-                    auto& v=find->second;
-                    auto upper= upper_bound(v.begin(),v.end(),j);
-                    if(upper!=v.end())
-                    res.push_back(vector<int>{nums[i],nums[j],-nums[i]-nums[j]});
-                }
+        sort(nums.begin(), nums.end());
+        int oldi = INT32_MAX;
+        auto i = nums.begin() - 1;
+        while (i < nums.end() - 2)
+        {
+            while (*++i == oldi)
+                ;
+            oldi = *i;
+
+            auto begin = i;
+
+            int old = *i - 1;
+
+            auto end = nums.end();
+            while (true)
+            {
+                //
+                while (*(++begin) == old)
+                    ;
+                if (begin >= end)
+                    break;
+                old = *begin;
+
+                int sub = -*i - *begin;
+
+                auto end1 = lower_bound(begin + 1, end, sub);
+                if (end1 != end && *end1 == sub && end1 != begin)
+
+                    res.push_back(vector<int>{*i, *begin, sub});
+
+                end = end1;
             }
         }
-        
         return res;
     }
 };
 int main(int argc, char const *argv[])
 {
     Solution a;
-    vector<int> vc{-1, 0, 1, 2, -1, -4};
+    vector<int> vc{-2, 0, 1, 1, 2};
     auto res = a.threeSum(vc);
     for (auto &v : res)
     {
