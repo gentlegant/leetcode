@@ -15,7 +15,7 @@ class Solution
      }
      int shortest(vector<string>& strs) {
       
-        auto b=min_element(strs.begin(),strs.end(),compare);
+        auto b=min_element(strs.begin(),strs.end());
         return b->size();
     }
     string longestCommonPrefix(vector<string> &strs)
