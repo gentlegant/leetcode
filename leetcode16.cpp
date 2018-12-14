@@ -49,13 +49,13 @@ public:
 
                 int third = target-*one - *sec;
 
-                auto find = lower_bound(sec + 1, end, third);
+                auto find = upper_bound(sec + 1, end, third)-1;
                 if (find != end ){
                     if(*find==third)
                         return 0;
                     else{
-                        res=compare(res,*find-third);
-                        if(sec!=find-1)
+                       
+                        if(sec!=find)
                             res=compare(res,third-*(find-1));
 
                         end = find;
