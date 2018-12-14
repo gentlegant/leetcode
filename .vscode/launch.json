@@ -4,30 +4,26 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+       
         {
-            "name": "(gdb) Launch",
-            "preLaunchTask": "build",
+            "name": "(gdb) Launch",    //名称
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}",    //表示当前目录
             "environment": [],
-            
-     
-            "externalConsole": true,
-            "MIMode": "gdb",
-            "miDebuggerPath": "D:/MinGW/bin/gdb.exe",
-            // GDB的路径，注意替换成自己的路径 
+            "externalConsole": false, // 在vscode自带的终端中运行，不打开外部终端
+            "MIMode": "gdb",    //用gdb来debug
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "preLaunchTask": "build"  //在执行debug hello world前，先执行build hello world这个task，看第4节
         },
         {
             "name": "Python: Terminal (integrated)",

@@ -6,31 +6,25 @@
 // ${fileExtname}: the current opened file's extension 
 // ${cwd}: the current working directory of the spawned process
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
-            "type": "shell",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            },
-            "windows": {
-                "command": "g++",
-                "args": [
-                    "-ggdb",
-                    "\"${file}\"",
-                    "--std=c++11",
-                    "-o",
-                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-                ]
-            }
+            "label": "build",     // task的名字
+            "type": "shell",   
+            "command": "g++",    //编译命令
+            "args": [    //编译参数列表
+                "-g", //生成调试信息
+                "${fileDirname}/${fileBasenameNoExtension}.cpp",
+              
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+              
+             
+          
+           
+            ]
         }
     ]
 }
