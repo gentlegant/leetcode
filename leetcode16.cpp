@@ -15,14 +15,14 @@ using namespace std;
 
 
 class Solution {
-public:
-    int compare(int x,int y){
-        return abs(x)<abs(y)?x:y;
+private:
+     int closer(int x,int y,int target){
+        return abs(x-target)<abs(y-target)?x:y;
     }
-
-
+public:
     int threeSumClosest(vector<int>& nums, int target) {
-        int res=INT32_MAX;
+      
+        int res=nums[0]+nums[1]+nums[2];
         sort(nums.begin(), nums.end());
         int oldone = INT32_MAX;
         auto one = nums.begin() - 1;
@@ -32,11 +32,8 @@ public:
             while (*++one == oldone)
                 ;
             oldone = *one;
-
             auto sec = one;
-
             int oldsec = *one - 1;
-
             auto end = nums.end();
             while (true)
             {
@@ -46,24 +43,21 @@ public:
                 if(sec>=end)
                     break;
                 oldsec = *sec;
-
                 int third = target-*one - *sec;
-
-                auto find = upper_bound(sec + 1, end, third)-1;
-                if (find != end ){
+                //第一个大于等于third的数
+                auto find = lower_bound(sec + 1, end, third);
+                if(find!=end){
                     if(*find==third)
-                        return 0;
-                    else{
-                       
-                        if(sec!=find)
-                            res=compare(res,third-*(find-1));
-
-                        end = find;
-                    }
+                        return target;
+                    int sum=*find+*one+*sec;
+                    res=closer(res,sum,target);
                 }
-                  
-
-     
+                if(find-1!=sec){
+                    int sum=*(find-1)+*one+*sec;
+                    res=closer(res,sum,target);
+                 
+                }
+                end = find;
             }
         }
         return res;
@@ -73,7 +67,7 @@ public:
 int main(int argc, char const *argv[])
 {
     Solution a;
-    vector<int> b={-1,2,1,-4};
-    cout<<a.threeSumClosest(b,1);
+    vector<int> b={0,-4,1,-5};
+    cout<<a.threeSumClosest(b,0);
     return 0;
 }
