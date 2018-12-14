@@ -1,7 +1,7 @@
 // 16. 3Sum Closest
 // Medium
 
-// Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+// Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly first solution.
 
 // Example:
 
@@ -24,41 +24,26 @@ public:
       
         int res=nums[0]+nums[1]+nums[2];
         sort(nums.begin(), nums.end());
-        int oldone = INT32_MAX;
-        auto one = nums.begin() - 1;
-        while (one < nums.end() - 2)
+
+        auto first = nums.begin()-1;
+        while (++first < nums.end() - 2)
         {
-            //过滤相同的第一个数
-            while (*++one == oldone)
-                ;
-            oldone = *one;
-            auto sec = one;
-            int oldsec = *one - 1;
-            auto end = nums.end();
-            while (true)
+          
+            auto second = first+1;
+            auto third = nums.end()-1;
+            while (second<third)
             {
-                //过滤相同的第2个数
-                while (*(++sec) == oldsec)
-                    ;
-                if(sec>=end)
-                    break;
-                oldsec = *sec;
-                int third = target-*one - *sec;
+                int sum = *first+*second+*third;
                 //第一个大于等于third的数
-                auto find = lower_bound(sec + 1, end, third);
-                if(find!=end){
-                    if(*find==third)
-                        return target;
-                    int sum=*find+*one+*sec;
+                if(sum==target)
+                    return target;
+                else{
                     res=closer(res,sum,target);
+                    sum>target?third--:second++;
                 }
-                if(find-1!=sec){
-                    int sum=*(find-1)+*one+*sec;
-                    res=closer(res,sum,target);
-                 
-                }
-                end = find;
+              
             }
+
         }
         return res;
     }
