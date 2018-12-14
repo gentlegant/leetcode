@@ -29,7 +29,7 @@ void readinput(vector<int> &vc){
     }
 }
 bool setadd(set<int> &st,int target,int add){
-    st.
+
     for(auto it=st.begin();it!=last;it++){
         
         auto added=*it+add;
