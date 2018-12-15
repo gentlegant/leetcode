@@ -3,18 +3,30 @@ using namespace std;
 #include <stack>
 #include <algorithm>
 #include <vector>
-#include <set>
 
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int res = 0;
+        stack<int> st;
+        heights.push_back(0);
+        for (int i = 0; i < heights.size(); ++i) {
+            while (!st.empty() && heights[st.top()] >= heights[i]) {
+                int cur = st.top(); st.pop();
+                res = max(res, heights[cur] * (st.empty() ? i : (i - st.top() - 1)));
+            }
+            st.push(i);
+        }
+        return res;
+    }
+};
 int main(){
-    set<int> st={2,3,5,3,34,5,7};
-    auto a=st.end();
+    Solution a;
+    vector<int> vc{4,2,0,3,2,5};
 
-    for (auto i=st.begin();i!=a;i++){
-        st.insert(*i*2);
-    }
-    for (auto ii:st){
-        cout<<ii<<endl;
-    }
+
     
-   
+    auto b=a.largestRectangleArea(vc);
+    cout<<b;
 }
