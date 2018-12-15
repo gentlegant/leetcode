@@ -1,32 +1,47 @@
 #include <iostream>
-using namespace std;
-#include <stack>
+#include <queue>
+
 #include <algorithm>
-#include <vector>
 
+using namespace std;
 
-class Solution {
-public:
-    int largestRectangleArea(vector<int>& heights) {
-        int res = 0;
-        stack<int> st;
-        heights.push_back(0);
-        for (int i = 0; i < heights.size(); ++i) {
-            while (!st.empty() && heights[st.top()] >= heights[i]) {
-                int cur = st.top(); st.pop();
-                res = max(res, heights[cur] * (st.empty() ? i : (i - st.top() - 1)));
-            }
-            st.push(i);
-        }
-        return res;
-    }
+struct Compare {
+    bool operator() (int a,int b) {
+        if(b==-1)
+            return false;
+        if(a==-1)
+            return true;
+        return a > b;
+    } 
 };
+
 int main(){
-    Solution a;
-    vector<int> vc{4,2,0,3,2,5};
 
-
+  
     
-    auto b=a.largestRectangleArea(vc);
-    cout<<b;
+    priority_queue<int,vector<int>,Compare> q;
+    q.push(-1);
+    q.push(3);
+       
+ 
+    q.push(-1);
+    q.push(66);
+    q.push(66);
+        q.push(-1);
+    q.push(1);
+
+ 
+    q.push(1);
+    cout<<endl;
+    int count=0;
+    while(!q.empty()&&count++<20){
+        cout<<q.top()<<endl;
+        q.push(-1);
+        q.pop();
+    }
+    while(!q.empty())
+    {
+        cout<<q.top();
+        q.pop();
+    }
 }

@@ -21,6 +21,7 @@
 //思路：归并排序
 #include <vector>
 #include<iostream>
+#include <queue>
 using namespace std;
 
 
@@ -92,19 +93,58 @@ public:
         return head->next;
     }
 };
+//应该满足 交换律
+struct Compare {
+    bool operator() (ListNode *a, ListNode *b) {
+        
+        if(!b)
+            return false;
+        if(!a)
+            return true;
+        
+        return a->val > b->val;
+    } 
+};
+
+//同样的，也可以采用 堆（优先队列）
+//男人写的代码，必须优雅
+class Solution1{
+    priority_queue<ListNode *,vector<ListNode*>,Compare> q;
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.empty())
+            return NULL;
+        ListNode*head=new ListNode(0);
+        auto temp=head;     
+        for(auto i :lists)
+            q.push(i);
+        while(true){
+            auto t=q.top();
+            if(!t)
+                break;
+            q.pop();
+            temp->next=t;
+            temp=temp->next;
+            q.push(t->next);
+        }
+
+        return head->next;
+    }
+};
+
 int main(int argc, char const *argv[])
 {
     /* code */
     ListNode *tmp=new ListNode(2);
     tmp->next=new ListNode(5);
-
+    tmp->next->next=new ListNode(7);
     ListNode *tmp1=new ListNode(3);
     tmp1->next=new ListNode(6);
     ListNode *tmp2=new ListNode(4);
     tmp2->next=new ListNode(6);
     ListNode *tmp3=new ListNode(6);
-    vector<ListNode*> vc={tmp1,tmp2,tmp,tmp3};
-    Solution a;
+    vector<ListNode*> vc={tmp1,tmp2,tmp};
+    Solution1 a;
 
     auto b=a.mergeKLists(vc);
 
