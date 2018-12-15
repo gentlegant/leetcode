@@ -17,7 +17,7 @@
             "environment": [],
             
      
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "D:/MinGW/bin/gdb.exe",
             // GDB的路径，注意替换成自己的路径 
