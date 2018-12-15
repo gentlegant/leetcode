@@ -25,24 +25,39 @@ class Solution:
         :type target: int
         :rtype: List[List[int]]
         """
-        res=[]
+        if(len(nums)<4):
+            return []
+        res=set()
         dic={}
-        
+        nums.sort()
         
         for I,i in enumerate(nums):
-            for J,j in enumerate(nums):
-                if J==i:
-                    continue
-                dic[i+j]=1   
-        print(dic)
-
-
-
-
-
+            for J in range(I+1,len(nums)):
+                j=nums[J]
+                tmp=dic.get(i+j,[])
+                tmp.append([I,J])
+    
+                dic[i+j]=tmp
+      
+        for k,v in dic.items():
+            if(2*k>target):
+                continue
+            sub_=target-k
+            sub=dic.get(sub_,None)
+            if(sub!=None):
+                
+                tmp=[i+j for i in v for j in sub if(i[0]!=j[0] and i[0]!=j[1] and i[1]!=j[0] and i[1]!=j[1])]
+                for i in tmp:
+                    four=[nums[k] for k in i]
+                    four.sort()
+                    res.add(tuple(four))
+               
+        res=list(res)
+        for i in range(len(res)):
+            res[i]=list(res[i])
 
         return res
-
 a=Solution()
-b=a.fourSum([1,2,0,3],3)
-print(b)
+b=[-3,-1,0,2,4,5]
+c=a.fourSum(b,0)
+print(c)
