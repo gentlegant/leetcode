@@ -30,8 +30,6 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-
-
 class Solution {
     //losertrees记录败者下标
     //winner记录胜者下标
