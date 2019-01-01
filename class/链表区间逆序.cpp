@@ -81,43 +81,36 @@ private:
         return rem;
     }
 };
-ListNode* readinput(stringstream &in, int &n){
-    int t;
-    in>>t;
+ListNode* readinput(int count,int &n){
+   
     ListNode *tmp=new ListNode(0),*ret=tmp;
     
-    while(t--){
+    while(count--){
         char tt;
-        in>>tt;
+        cin>>tt;
         tmp->next=new ListNode(tt);
         tmp=tmp->next;
     }
-    in>>n;
+    cin>>n;
     return ret->next;
 }
 int main(int argc, char const *argv[])
 {
     Solution sol;
-    string s;
+    int count;
    
-    while(true){
-        getline(cin,s);
-        if(s.empty())
-            break;
-        stringstream sss(s);
+    while(cin>>count){
         int n;
-        auto res=readinput(sss,n);
-        if(res==NULL){
-            break;
-        }
+        auto res=readinput(count,n);
+     
         auto res1=sol.reverseKGroup(res,n);
      
         while(res1->next){
             cout<<res1->val<<" ";
             res1=res1->next;
         }
-        cout<<res1->val;
-        cout<<endl;
+        cout<<res1->val<<endl;
+   
     }
     
     return 0;

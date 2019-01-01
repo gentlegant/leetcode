@@ -1,28 +1,22 @@
 #include <iostream>
 #include <vector>
-#include <sstream>
+
 #include <algorithm>
 using namespace std;
 
-void readinput(vector<int> &vc)
-{
-    string str;
-    getline(cin, str);
-    int tmp;
-    istringstream s(str);
-    s>>tmp;
-    while (s >> tmp)
-        vc.push_back(tmp);
-}
 int main(int argc, char const *argv[])
 {
     /* code */
-    while (true)
+    int count;
+    while (cin>>count)
     {
         vector<int> vc;
-        readinput(vc);
-        if(vc.empty())
-            break;
+        while(count--){
+            int tmp;
+            cin>>tmp;
+            vc.push_back(tmp);
+        }
+   
         for (auto i = vc.begin(); i != vc.end(); i++)
         {
             auto place = upper_bound(vc.begin(), i, *i);

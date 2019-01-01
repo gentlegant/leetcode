@@ -53,11 +53,20 @@ void QiockSortNor(vector<int> &v, int left, int right)
 
 int main(int argc, char const *argv[])
 {
-    vector<int> vc = {3, 2, 1, 23, 5, 4643, 6, 757, 324};
-    QiockSortNor(vc, 0, vc.size());
-    for (auto &i : vc)
-    {
-        cout << i << endl;
+   int count;
+    while(cin>>count){
+        vector<int> vc;
+        while(count--){
+            int tmp;
+            cin>>tmp;
+            vc.push_back(tmp);
+        }
+
+       QiockSortNor(vc,0,vc.size());
+
+        for(int i=0;i<vc.size()-1;i++)
+            cout<<vc[i]<<" ";
+        cout<<vc.back();
+        cout<<endl;
     }
-    return 0;
 }
