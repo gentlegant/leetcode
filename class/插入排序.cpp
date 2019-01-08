@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
                 *tmp = *(tmp - 1);
             *place = rem;
         }
-
+      
         for (int i = 0; i < vc.size() - 1; i++)
             cout << vc[i] << " ";
         cout << vc.back();

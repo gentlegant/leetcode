@@ -1,8 +1,9 @@
 // # Graham扫描法
-
+#include <time.h>
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <fstream>  
 #include <algorithm>
 using   namespace std;
 
@@ -10,9 +11,8 @@ class point{
 private:
     double x,y;
 public:
-    void show(){
-
-        cout<<x<<" "<<y<<" "<<endl;
+    void show(ostream &o){
+        o<<x<<" "<<y<<" "<<endl;
     }
     point(double x_,double y_){
         x=x_;
@@ -33,43 +33,63 @@ bool cmp1(point &l,point &r){
         return l.y<r.y;
     }
 // l 和r 谁到p的夹角更大
+//p总是再左边
 bool cmp2(point &l,point &r,point &p){
+
+
     if(l.x==p.x)
-        return true;
-    if(r.x==p.x)
         return false;
+    if(r.x==p.x)
+        return true;
     return (l.y-p.y)/(l.x-p.x)<(r.y-p.y)/(r.x-p.x);
 }
-vector<point> readinput(){
+vector<point*> readinput(){
     vector<point> vc;
-    string s;
-    getline(cin,s);
-    istringstream ss(s);
-    int x,y;
-    while (ss >>x>>y)
+    
+    for(int i=0;i<30;i++){
+        int x=rand()%1000;
+        int y=rand()%1000;    
         vc.push_back(point(x,y));
-    sort(vc.begin(),vc.end(),cmp1);
-     for(auto &i:vc)    {
-        i.show();
     }
-    vector<point> res;
-    auto del=res.begin();
-    res.push_back(*del);
-    while(!vc.empty()){
-        vc.erase(del);
-        auto k=max_element(vc.begin(),vc.end(),[del](point& x,point y)->bool{return cmp2(x,y,*del);} );
-        res.push_back(*k);
-        if(*k==*res.begin())
-            break;
+  
+    ofstream out;
+    out.open(".\\out.txt");
+    for(auto &i:vc){
+        i.show(out);
+    }
+
+    sort(vc.begin(),vc.end(),cmp1);
+   
+    //不占用多余空间，只存储迭代器
+  
+    vector<point*> res;
+    res.push_back(&*vc.begin());
+    //先从左到右，再从右到左
+    auto tmp=vc.begin();
+    while(tmp!=vc.end()-1){
+        tmp=max_element(tmp+1,vc.end(),[tmp](point &a,point &b )->bool {return cmp2(a,b,*tmp);});
+        res.push_back(&*tmp);
+    }
+    auto rtmp=vc.rbegin();
+    while(rtmp!=vc.rend()-1){
+        rtmp=max_element(rtmp+1,vc.rend(),[rtmp](point &a,point &b )->bool {return cmp2(a,b,*rtmp);});
+        res.push_back(&*rtmp);
+    }
+    for(auto &i:res)  
+        i->show(cout);
+    
+    ofstream out1;
+    out1.open(".\\out1.txt");
+    for(auto &i:res){
+        i->show(out1);
     }
     return res;
 }
 
 int main(){
-    
+   
+    srand( unsigned(time(0)));
     auto p=readinput();
-    cout<<1<<endl;
-    for(auto &i:p){
-        i.show();
-    }
+    system("python C:\\Users\\james\\Desktop\\alg\\class\\paint.py");
+   
 }

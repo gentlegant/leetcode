@@ -47,14 +47,16 @@ int main()
 	cin>>turn;
 	while(turn--){
 		int k, n;
-		cin>>k;
-		cin>>n;
+        cin>>n;
+		
+		
 		vector<int> arr;
 		for(int i = 0 ; i < n ; i++){
 			int tmp;
             cin>>tmp;
             arr.push_back(tmp);
         }
+        cin>>k;
 		cout << partition(arr, n, k) << endl; 
 	}
     return 0; 
